@@ -42,6 +42,7 @@ You have to start the demo from the command line of your controller. Here I show
 
 <img src="https://github.com/Inqbus/somose/blob/main/images/setup_1.png" alt="drawing" width="400"/>
 
+In the Thonny command line type:
 
 ```python
 from somose_demo import Demo
@@ -77,6 +78,8 @@ We change the address back to the initial address 85
 I2C scan: [85]
 Sensor should be on the old address. Address change demo finished.
 ```
+
+Or some other messages helping you to find the problem.
 
 ### RaspberryPi drivers
 Coming soon!
