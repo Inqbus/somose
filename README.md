@@ -43,8 +43,40 @@ You have to start the demo from the command line of your controller. Here I show
 <img src="https://github.com/Inqbus/somose/blob/main/images/setup_1.png" alt="drawing" width="400"/>
 
 
+```python
+from somose_demo import Demo
+demo = Demo()
+```
 
+You should see something like this:
 
+```
+Bringing up the I2C bus on sda=18 scl=19 addr=85 freq=1000000
+If these are not your settings please call Demo with the correct settings
+These are the default setting: Demo(sda=18, scl=19, addr=85, freq=1000000
+I2C scan: [85]
+SoMoSe Sensor is up as I2C device 85 and ready
+We are statting a measurement
+First we connect to our sensor at addr=85
+Then we do three measurements, with a 10 second pause between
+Mean moisture:b'\x01', current moisture b'\x01'
+Mean moisture:b'\x01', current moisture b'\x01'
+All measurements done
+Now we demonstrate changing the I2C address of the sensor
+The sensor should be currently at address 85
+I2C scan: [85]
+First we connect to our sensor at addr=85
+Then change the address to 34
+The new scan should show the addr 34
+I2C scan: [34]
+Now we delete our SoMoSe instance and fetch a new one from the new address
+And we do measurements
+Mean moisture:b'\x01', current moisture b'\x01'
+Mean moisture:b'\x01', current moisture b'\x01'
+We change the address back to the initial address 85
+I2C scan: [85]
+Sensor should be on the old address. Address change demo finished.
+```
 
 ### RaspberryPi drivers
 Coming soon!
