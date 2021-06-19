@@ -5,6 +5,13 @@ Drivers for the digital moisture sensor SoMoSe V1.1 in Micropython(, RaspberryPi
 
 You can order the sensor via e.g. Amazon. Look for "BeFlE kapazitiver Bodenfeuchtesensor SoMoSe v1.1" 
 
+The sensor is quite cool. 
+Locating the ADC in the sensor eliminates a lot of the effects owners of analogue moisture sensors have to deal with.
+
+The capacity impact of cable length can be compensated easily by reducing the I2C frequency.  
+Setting the I2C bus freq down to 100Khz you can reliably measure moisture over 10 meters distance using cheap telephone cable.
+
+
 ### Project maturity
 This project is beta. Please evaluate the code before you use it in production.
 
@@ -15,7 +22,7 @@ It should work on any controller with Hardware I2C, but it may not. Please repor
 #### Installaton
 
 To use solely the driver copy the file "somose.py" to your controller.
-If you like to have setup-support you may copy "somose_demo.py" as well.
+If you like to have additional setup-support you may copy "somose_demo.py" as well.
 
 #### Fast pace usage
 
@@ -40,11 +47,11 @@ print('Mean moisture:{}, current moisture {}'.format(mean, curr))
 
 The demo helps you with the usual obstacles any beginner stumbles over.
 
-You have to start the demo from the command line of your controller. Here I show an image from a ![thonny](https://thonny.org) session.
+You have to start the demo from the command line of your controller. Here an image from a ![thonny](https://thonny.org) session.
 
 <img src="https://github.com/Inqbus/somose/blob/main/images/setup_1.png" alt="drawing" width="400"/>
 
-In the Thonny command line type:
+In the Thonny command line (or any other commandline you have to your controller type:
 
 ```python
 from somose_demo import Demo
