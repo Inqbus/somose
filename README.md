@@ -1,7 +1,9 @@
 # somose
-Python drivers for the digital moisture sensor SoMoSe V1.1 for Micropython and RaspberryPi
+Drivers for the digital moisture sensor SoMoSe V1.1 in Micropython(, RaspberryPi and C).
 
 <img src="https://github.com/Inqbus/somose/blob/main/images/sensor.jpg" alt="drawing" width="200"/>
+
+You can order the sensor ![here](https://www.amazon.de/gp/product/B091D6HNM6) .
 
 ### Project maturity
 This project is beta. Please evaluate the code before you use it in production.
