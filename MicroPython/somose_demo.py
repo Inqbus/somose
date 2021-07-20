@@ -128,9 +128,9 @@ If so Please run the demo with the I2C address of the sensor as parameter. Demo(
         """
             
         # Shows how to measure moisture
-        measure()
+        self.measure()
         # Shows how to change the I2C address of the sensor
-        set_addr()
+        self.set_addr()
         # shows how to set the limits in the sensor
-        set_limits()
+        self.set_limits()
     

@@ -9,7 +9,7 @@ from time import sleep
 FACTORY_ADDRESS = 85
 FACTORY_SDA = 18
 FACTORY_SCL = 19
-FACTORY_FREQ = 1000000
+FACTORY_FREQ = 400000
 
 
 
@@ -48,8 +48,7 @@ class SoMoSe():
         curr : The current sensor reading
         """
         self.i2c.writeto(self.addr, 'v')
-        mean = self.i2c.readfrom(self.addr, 1)
-        curr = self.i2c.readfrom(self.addr, 1)
+        mean, curr = bytes(self.i2c.readfrom(self.addr, 2))
         
         return mean, curr
     
@@ -57,8 +56,8 @@ class SoMoSe():
         """
         Split a data word into low and high bytes and transfer into a str buffer
         """
-        low_byte = moist_limit & 0x00FF
-        high_byte = (moist_limit & 0xFF00) >> 8
+        low_byte = data & 0x00FF
+        high_byte = (data & 0xFF00) >> 8
         return [low_byte, high_byte]
     
     def set_dry_limit(self, dry_limit=90):
@@ -66,15 +65,14 @@ class SoMoSe():
         Set the internal value for dry soil
         dry_value : The new dry value: Factory default value 90
         """
-        low_byte, high_byte = self.split_low_high(dry_limit)
-        self.i2c.writeto(self.addr, [ord('D')] + self.low_high_buf(moist_limit))
+        self.i2c.writeto(self.addr, bytearray([ord('D')] + self.low_high_buf(dry_limit)))
         
     def set_moist_limit(self, moist_limit=4160):
         """
         Set the internal value for dry soil
         moist_limit : The new dry limit: Factory default value 4160
         """
-        self.i2c.writeto(self.addr, [ord('U')] + self.low_high_buf(moist_limit))
+        self.i2c.writeto(self.addr, bytearray([ord('U')] + self.low_high_buf(moist_limit)))
         
     def set_limits(self, dry_limit=None, moist_limit=None):
         """
@@ -85,15 +83,15 @@ class SoMoSe():
         if moist_limit is not None:
             self.set_moist_limit(moist_limit)
             
-    
     def get_dry_limit(self):
         """
         Get the internal value for dry soil
-        Returns dry_value : The dry value: Factory default value 90
+        Returns dry_limit : The dry limit: Factory default value 90
         """
         self.i2c.writeto(self.addr, 'd')
-        dry_raw = self.i2c.readfrom(self.addr, 2)
-        return dry_raw
+        dry_limit_bytes = bytes(self.i2c.readfrom(self.addr, 2))
+        dry_limit = dry_limit_bytes[0] << 8 + dry_limit_bytes[1]
+        return dry_limit
         
     def get_moist_limit(self):
         """
@@ -101,8 +99,9 @@ class SoMoSe():
         returns : moist_limit : The moist limit: Factory default value 4160
         """
         self.i2c.writeto(self.addr, 'u')
-        moist_raw = self.i2c.readfrom(self.addr, 2)
-        return moist_raw
+        moist_limit_bytes = bytes(self.i2c.readfrom(self.addr, 2))
+        moist_limit = moist_limit_bytes[0] << 8 + moist_limit_bytes[1]
+        return moist_limit
         
     def get_limits(self):
         """
@@ -110,7 +109,7 @@ class SoMoSe():
         """
         dry_limit = self.get_dry_limit()
         moist_limit = self.get_moist_limit()
-        return  dry_limit, moist_limit
+        return dry_limit, moist_limit
     
 
 
