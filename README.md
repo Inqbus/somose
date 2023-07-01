@@ -176,5 +176,5 @@ nighttime, based on moisture levels.
 If you have well drained plants e.g. Tomatoes watering in intervals is a good strategie: Watering for 30 secs. Two minutes Waiting. Repeat.
 Too much water will only be drained away and you are loosing water. Water in Europe is becoming a crucial resource due to climate change.
 The evaporation rate increases 8% per degree Celsius. And here in Germany we have 1.6 degrees warming already.
-I hope that SoMoSe will help us all to deal with water shortage we already have to deal with.  
+I hope that SoMoSe will help us all to cope with the water shortage.  
 
