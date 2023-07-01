@@ -23,7 +23,7 @@ Approved ESP32 Controllers:
 
 Left to right: LOLIN32 lite clone (from AZ-Delivery), TTGO T-Koala, Mini D1 ESP32
 
-<img src="https://github.com/Inqbus/somose/blob/main/images/esp_controller.jpg" alt="drawing" width="200"/>
+<img src="https://github.com/Inqbus/somose/blob/main/images/esp32_controller.jpg" alt="drawing" width="200"/>
 
 
 
