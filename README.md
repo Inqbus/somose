@@ -5,8 +5,8 @@ Drivers for the digital moisture sensor SoMoSe V1.1 in Micropython(, RaspberryPi
 
 You can order the sensor via e.g. Amazon. Look for "BeFlE kapazitiver Bodenfeuchtesensor SoMoSe v1.1" 
 
-The sensor is quite cool. 
-Locating the ADC in the sensor eliminates a lot of the effects owners of analogue moisture sensors have to deal with.
+The sensor is quite cool. Almost any analog moisture sensor has problems with shifting ground.   
+Placing the ADC in the sensor eliminates a lot of the effects owners of analogue moisture sensors have to deal with.
 
 The capacity impact of cable length can be compensated easily by reducing the I2C frequency.  
 Setting the I2C bus freq down to 100Khz you can reliably measure moisture over 10 meters distance using cheap telephone cable.
@@ -15,17 +15,15 @@ Setting the I2C bus freq down to 100Khz you can reliably measure moisture over 1
 ### Project maturity
 This project is beta. Please evaluate the code before you use it in production.
 
-### MicroPython drivers
-The MicroPython driver lives in the MicroPython directory. This driver is tested against three ESP32 controllers, only. 
-It should work on any controller with Hardware I2C, but it may not. Please report any errors I will have a look.
-
-Approved ESP32 Controllers:
+### MicroPython driver
+The MicroPython driver lives in the MicroPython directory. It is tested against three ESP32 controllers. 
 
 Left to right: LOLIN32 lite clone (from AZ-Delivery), TTGO T-Koala, Mini D1 ESP32
 
 <img src="https://github.com/Inqbus/somose/blob/main/images/esp32_controller.jpg" alt="drawing" width="200"/>
 
-
+The driver should run on any hardware supporting MicroPython and having a hardware I2C. It may also work on Hardware with Soft-I2C too, but not as stable. 
+Please report any issues I will have a look.
 
 
 #### Installation
