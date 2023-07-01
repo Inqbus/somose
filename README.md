@@ -1,6 +1,9 @@
-# somose
-Drivers for the digital moisture sensor SoMoSe V1.1 in Micropython(, RaspberryPi and C).
 
+# SoMoSe Driver
+Driver for the digital moisture sensor SoMoSe V1.1 for MicroPython.
+
+
+# SoMoSe Sensor
 <img src="https://github.com/Inqbus/somose/blob/main/images/sensor.jpg" alt="drawing" width="200"/>
 
 You can order the sensor via e.g. Amazon. Look for "BeFlE kapazitiver Bodenfeuchtesensor SoMoSe v1.1" 
@@ -15,14 +18,15 @@ Setting the I2C bus freq down to 100Khz you can reliably measure moisture over 1
 ### Project maturity
 This project is beta. Please evaluate the code before you use it in production.
 
-### MicroPython driver
+
+### MicroPython Driver
 The MicroPython driver lives in the MicroPython directory. It is tested against three ESP32 controllers. 
 
 Left to right: LOLIN32 lite clone (from AZ-Delivery), TTGO T-Koala, Mini D1 ESP32
 
 <img src="https://github.com/Inqbus/somose/blob/main/images/esp32_controller.jpg" alt="drawing" width="200"/>
 
-The driver should run on any hardware supporting MicroPython and having a hardware I2C. It may also work on Hardware with Soft-I2C too, but not as stable. 
+The driver should run on any hardware supporting MicroPython and having a hardware I2C. It may also work on Hardware with Soft-I2C too, but maybe not as stable. 
 Please report any issues I will have a look.
 
 
@@ -33,13 +37,13 @@ If you like to have additional setup-support you may copy "somose_demo.py" as we
 
 #### Fast pace usage
 
-Here am minimal code example:
+Here am minimal code example (Hardware I2C):
 
 ```python
 from machine import I2C, Pin
 from somose import SoMoSe
 
-# get a I2C bus instance
+# get a Hardware I2C bus instance
 i2c = I2C(0, sda=Pin(18), scl=Pin(19), freq=100000)
 
 # Fire up the SoMoSe on the I2C bus 
@@ -49,6 +53,16 @@ somose = SoMoSe(i2c)
 mean, curr = somose.measure()
 print('Mean moisture:{}, current moisture {}'.format(mean, curr))
 ```
+
+If you are having only software I2C 
+
+```python
+# get a Software I2C bus instance
+i2c = I2C(sda=Pin(18), scl=Pin(19), freq=100000)
+```
+
+You may have to adjust the 'freq' parameter for longer cables. 
+
 
 #### Using the demo for setup
 
@@ -98,10 +112,69 @@ Sensor should be on the old address. Address change demo finished.
 Or some other messages helping you find the problem.
 
 
-#### Minimal code with logging and a timer
+#### Minimal code with logging, timestamps and a timer
 
 Please have a look at "somose_main.py"
 
+```python
+from machine import Pin, I2C, Timer, RTC
+
+from somose import SoMoSe
+
+rtc = RTC()
+rtc.datetime((2023, 7, 1, 0, 0, 0, 0, 0))
+
+def log(msg):
+    now = rtc.datetime()
+    now_str = f'{now[0]:.4d}-{now[1]:02d}-{now[2]:02d} {now[4]:02d}:{now[5]:02d}:{now[6]:02d}' 
+    print(now_str, msg)
 
 
+i2c = I2C(0, sda=Pin(18), scl=Pin(19))
+
+log("I2C Scan: should show '[85]'")
+
+scan_res = i2c.scan()
+
+log(f'scan result: {scan_res}')
+
+somose_sensor = SoMoSe(i2c)
+
+log('Waiting 10 seconds for first timer call')
+
+
+
+def get_moisture(_timer):
+    
+    log('Doing measurement')
+    mean, current = somose_sensor.measure()
+    log(f'mean: {mean}, current: {current}')
+    
+    
+timer0 = Timer(0)
+
+timer0.init(period=10000, mode=Timer.PERIODIC, callback=get_moisture)
+```
+
+### General advice on watering
+
+#### Take the time of day into account
+
+If you like to have your RTC reboot-safe you can use a
+
+DollaTek DS1307 AT24C32
+
+Battery powered realtime clock also via I2C. 
+
+I am using this in my Greenhouse since I like to water my plants not only by moisture level but also by time. Watering 
+during high solar input is useless since the water will evaporate quickly. A better strategy is to water in the 
+nighttime, based on moisture levels.
+
+
+#### Drain in intervals
+
+If you have well drained plants e.g. Tomatoes watering in intervals is a good strategie: Watering for 30 secs. Two minutes Waiting. Repeat.
+Too much water will only be drained away and you are loosing water. Water in Europe is becoming a crucial resource due to climate change.
+The evaporation rate increases 8% per degree Celsius. And here in Germany we have 1.6 degrees warming already.
+I hope that SoMoSe will help us all to deal with water shortage we already have to deal with.  
 
