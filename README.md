@@ -16,12 +16,21 @@ Setting the I2C bus freq down to 100Khz you can reliably measure moisture over 1
 This project is beta. Please evaluate the code before you use it in production.
 
 ### MicroPython drivers
-The MicroPython driver lives in the MicroPython directory. This driver is tested against ESP32 and LOLIN32 controllers, only. 
+The MicroPython driver lives in the MicroPython directory. This driver is tested against three ESP32 controllers, only. 
 It should work on any controller with Hardware I2C, but it may not. Please report any errors I will have a look.
 
-#### Installaton
+Approved ESP32 Controllers:
 
-To use solely the driver copy the file "somose.py" to your controller.
+Left to right: LOLIN32 lite clone (from AZ-Delivery), TTGO T-Koala, Mini D1 ESP32
+
+<img src="https://github.com/Inqbus/somose/blob/main/images/esp_controller.jpg" alt="drawing" width="200"/>
+
+
+
+
+#### Installation
+
+To use solely the driver, copy the file "somose.py" to your controller.
 If you like to have additional setup-support you may copy "somose_demo.py" as well.
 
 #### Fast pace usage
@@ -88,13 +97,13 @@ I2C scan: [85]
 Sensor should be on the old address. Address change demo finished.
 ```
 
-Or some other messages helping you to find the problem.
+Or some other messages helping you find the problem.
 
-### RaspberryPi drivers
-Coming soon!
 
-### C-Drivers
-Coming soon!
+#### Minimal code with logging and a timer
+
+Please have a look at "somose_main.py"
+
 
 
 
