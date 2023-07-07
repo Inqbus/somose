@@ -11,7 +11,7 @@ You can order the sensor via e.g. Amazon. Look for "BeFlE kapazitiver Bodenfeuch
 The sensor is quite cool. Almost any analog moisture sensor has problems with shifting ground.   
 Placing the ADC in the sensor eliminates a lot of the effects owners of analogue moisture sensors have to deal with.
 
-The capacity impact of cable length can be compensated easily by reducing the I2C frequency.  
+The capacity impact of cable length can be compensated easily by reducing the I2C frequency.   
 Setting the I2C bus freq down to 100Khz you can reliably measure moisture over 10 meters distance using cheap telephone cable.
 
 
@@ -171,10 +171,13 @@ during high solar input is useless since the water will evaporate quickly. A bet
 nighttime, based on moisture levels.
 
 
-#### Drain in intervals
+#### Watering in intervals
 
-If you have well drained plants e.g. Tomatoes watering in intervals is a good strategie: Watering for 30 secs. Two minutes Waiting. Repeat.
-Too much water will only be drained away and you are loosing water. Water in Europe is becoming a crucial resource due to climate change.
-The evaporation rate increases 8% per degree Celsius. And here in Germany we have 1.6 degrees warming already.
-I hope that SoMoSe will help us all to cope with the water shortage.  
+If you have well drained plants e.g. Tomatoes then watering in intervals is a good strategie: Watering for 30 secs. Two minutes Waiting. Repeat.
+Too much water will only be drained away and you are loosing water. 
+In our green house the evaporation is so strong that the soil is quite dry when the watering start. So the soil needs some time to smell and 
+then to be able to contain (more) water.     
+Water in Europe is becoming a crucial resource due to climate change. The evaporation rate increases 8% per degree Celsius. 
+And here in Germany we have 1.6 degrees warming already. 
 
+I hope that SoMoSe will help us all to cope with the water shortage due to climate change.  
