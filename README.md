@@ -1,12 +1,12 @@
 
 # SoMoSe Driver
-Driver for the digital moisture sensor SoMoSe V1.1 for MicroPython.
+Driver for the digital moisture sensor SoMoSe V1.1-V2.2 for MicroPython.
 
 
 # SoMoSe Sensor
 <img src="https://github.com/Inqbus/somose/blob/main/images/sensor.jpg" alt="drawing" width="200"/>
 
-You can order the sensor via e.g. Amazon. Look for "BeFlE kapazitiver Bodenfeuchtesensor SoMoSe v1.1" 
+You can order the sensor via e.g. Amazon. Look for "BeFlE kapazitiver Bodenfeuchtesensor SoMoSe" 
 
 The sensor is quite cool. Almost any analog moisture sensor has problems with shifting ground.   
 Placing the ADC in the sensor eliminates a lot of the effects owners of analogue moisture sensors have to deal with.
