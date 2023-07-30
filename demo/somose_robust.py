@@ -6,6 +6,8 @@ To achieve this functionality the Vcc of the SoMoSe has to be a GPIO and NOT the
 from machine import Pin, I2C, Timer, RTC
 
 from somose import SoMoSe
+from wifi import WiFi
+from mqtt import MQTT
 
 # Power GPIO for SoMoSe Sensor
 SOMOSE_POWER_PIN = 23
@@ -62,6 +64,10 @@ def get_moisture(_timer):
 
 # Get a Somose Control instance
 somose = RobustSomose()
+
+wifi = WiFi()
+
+mqtt = MQTT()
 
 timer0 = Timer(0)
 
